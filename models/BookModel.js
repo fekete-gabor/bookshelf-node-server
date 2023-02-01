@@ -10,10 +10,6 @@ const BookSchema = new mongoose.Schema(
     subtitle: String,
     authors: Array,
     averageRating: Number,
-    myRating: {
-      type: Number,
-      default: 0,
-    },
     ratingsCount: Number,
     categories: Array,
     language: String,
