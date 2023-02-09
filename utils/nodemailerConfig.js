@@ -3,8 +3,8 @@ module.exports = {
   secure: false, // use SSL
   port: 587,
   auth: {
-    user: "itzel.ebert@ethereal.email",
-    pass: "ThpHTfRC9X8upRKVPN",
+    user: "rosario52@ethereal.email",
+    pass: "Pg6Akt1Ytb8NkFfntr",
   },
   tls: {
     rejectUnauthorized: false,
