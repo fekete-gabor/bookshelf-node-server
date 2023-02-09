@@ -9,6 +9,7 @@ const {
   logout,
   forgotPassword,
   resetPassword,
+  changeUserNotifications,
 } = require("../controllers/userControllers");
 
 router.get("/showCurrentUser", authenticateUser, showCurrentUser);
@@ -18,5 +19,6 @@ router.post("/login", login);
 router.delete("/logout", authenticateUser, logout);
 router.post("/forgotPassword", forgotPassword);
 router.post("/resetPassword", resetPassword);
+router.patch("/changeUserNotifications", changeUserNotifications);
 
 module.exports = router;
