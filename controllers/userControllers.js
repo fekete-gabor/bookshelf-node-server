@@ -61,7 +61,17 @@ const verifyEmail = async (req, res) => {
 };
 
 const showCurrentUser = async (req, res) => {
-  const { user } = req;
+  let { user } = req;
+
+  if (!user) {
+    return res.status(401).send("Please provide valid credentials!");
+  }
+
+  const findUser = await User.findOne({ email: user.email });
+  const { notification } = findUser;
+
+  user = { ...user, notification };
+
   res.status(200).json({ user });
 };
 
@@ -116,7 +126,11 @@ const login = async (req, res) => {
     });
 
     return res.status(200).json({
-      user: { name: user.name, email: user.email },
+      user: {
+        name: user.name,
+        email: user.email,
+        notification: user.notification,
+      },
     });
   }
 
@@ -149,7 +163,11 @@ const login = async (req, res) => {
   });
 
   res.status(200).json({
-    user: { name: user.name, email: user.email },
+    user: {
+      name: user.name,
+      email: user.email,
+      notification: user.notification,
+    },
   });
 };
 
@@ -234,6 +252,26 @@ const resetPassword = async (req, res) => {
   res.status(200).json({ msg: "Password reseted!" });
 };
 
+const changeUserNotifications = async (req, res) => {
+  const { email, notification } = req.body;
+  const update = { ...req.body, notification: !notification };
+
+  const user = await User.findOneAndUpdate({ email }, update, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    return res.status(401).send("Please provide valid credentials!");
+  }
+
+  const message = notification
+    ? "Notifications are turned off!"
+    : "Notifications are turned on!";
+
+  res.status(200).json({ message, notificationStatus: update.notification });
+};
+
 module.exports = {
   register,
   verifyEmail,
@@ -242,4 +280,5 @@ module.exports = {
   logout,
   forgotPassword,
   resetPassword,
+  changeUserNotifications,
 };
