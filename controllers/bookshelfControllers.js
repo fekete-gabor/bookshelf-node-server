@@ -3,10 +3,17 @@ const Book = require("../models/BookModel");
 const getAllBooks = async (req, res) => {
   const { author, title } = req.query;
 
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.maxResults) || 10;
+  const skip = (page - 1) * limit;
+
   const allBooks = await Book.find({ createdBy: req.user.userID });
+  const allUniqueIDs = [...new Set(allBooks.map((book) => book.id))];
 
   let books;
   let queryObj = {};
+  let numberOfPages;
+  let totalBooks;
 
   if (allBooks.length === 0) {
     return res.status(200).json({
@@ -17,10 +24,18 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length === 0 && title.length === 0) {
-    books = allBooks;
+    books = await Book.find({ createdBy: req.user.userID })
+      .skip(skip)
+      .limit(limit);
+
+    totalBooks = await Book.countDocuments();
+    numberOfPages = Math.ceil(totalBooks / limit);
+
     return res.status(200).json({
       success: true,
       numberOfBooks: books.length,
+      numberOfPages,
+      allUniqueIDs,
       books,
     });
   }
@@ -44,20 +59,17 @@ const getAllBooks = async (req, res) => {
     queryObj.title = { $regex: title, $options: "i" };
   }
 
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.maxResults) || 10;
-  const skip = (page - 1) * limit;
-
   books = await Book.find(queryObj).skip(skip).limit(limit);
 
-  const totalBooks = await Book.countDocuments(queryObj);
-  const numberOfPages = Math.ceil(totalBooks / limit);
+  totalBooks = await Book.countDocuments(queryObj);
+  numberOfPages = Math.ceil(totalBooks / limit);
 
   return res.status(200).json({
     success: true,
     numberOfBooks: books.length,
     numberOfPages,
     books,
+    allUniqueIDs,
   });
 };
 
