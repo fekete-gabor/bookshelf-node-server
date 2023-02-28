@@ -7,6 +7,7 @@ const app = express();
 
 const bookshelf = require("./routes/bookshelfRoutes");
 const user = require("./routes/authRoutes");
+const edits = require("./routes/editRoutes");
 const notFound = require("./middleware/not-found-middleware");
 const errorHandlerMiddleware = require("./middleware/error-handler-middleware");
 const authenticateUser = require("./middleware/auth-middleware");
@@ -39,6 +40,7 @@ app.use(xss());
 // routes
 app.use("/api/v1/auth", user);
 app.use("/api/v1/bookshelf", authenticateUser, bookshelf);
+app.use("/api/v1/edit", authenticateUser, edits);
 
 // error handler middleware
 app.use(errorHandlerMiddleware);
