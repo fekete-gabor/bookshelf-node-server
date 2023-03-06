@@ -1,4 +1,5 @@
 const Book = require("../models/BookModel");
+const Edit = require("../models/EditModel");
 
 const getAllBooks = async (req, res) => {
   const { author, title } = req.query;
@@ -112,6 +113,7 @@ const updateSingleBook = async (req, res) => {
 const removeSingleBook = async (req, res) => {
   const { id: bookID } = req.params;
   const singleBook = await Book.findOneAndDelete({ id: bookID });
+  await Edit.findOneAndDelete({ id: bookID });
 
   if (!singleBook) {
     return res.status(404).send(`No book with id: ${bookID}`);
@@ -120,10 +122,31 @@ const removeSingleBook = async (req, res) => {
   res.status(200).json(singleBook);
 };
 
+const rateBook = async (req, res) => {
+  const { userID } = req.user;
+  const { id: bookID } = req.params;
+  const { index } = req.query;
+
+  const book = await Book.findOne({ createdBy: userID, id: bookID });
+
+  if (!book) {
+    return res.status(404).send(`No book with id of ${bookID}`);
+  }
+
+  book.userRating = parseInt(index);
+
+  await book.save();
+
+  const stars = book.userRating;
+
+  res.status(200).json({ success: true, msg: "book updated!", stars });
+};
+
 module.exports = {
   getAllBooks,
   getSingleBook,
   createSingleBook,
   updateSingleBook,
   removeSingleBook,
+  rateBook,
 };
