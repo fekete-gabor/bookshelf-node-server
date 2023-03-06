@@ -6,7 +6,7 @@ const EditSchema = new mongoose.Schema(
     bookEdits: [
       {
         category: String,
-        inputs: [{ id: Number, name: String, desc: String }],
+        inputs: [{ id: String, name: String, desc: String }],
       },
     ],
     createdAt: {
