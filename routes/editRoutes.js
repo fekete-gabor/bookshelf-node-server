@@ -3,16 +3,17 @@ const router = express.Router();
 const {
   getAllCategories,
   getAllNotes,
-  createCategoryBtn,
-  createEdits,
-  updateEdits,
-  deleteEdits,
+  createCategory,
+  deleteCategory,
+  createNote,
+  updateNote,
+  deleteNote,
 } = require("../controllers/editControllers");
 
-router.route("/:id").patch(updateEdits).delete(deleteEdits);
-router.route("/createCategoryBtn/:id").post(createCategoryBtn);
-router.route("/createEdits/:id").post(createEdits);
+router.route("/:id").patch(updateNote).delete(deleteNote);
+router.route("/createCategory/:id").post(createCategory);
+router.route("/deleteCategory/:id").delete(deleteCategory);
+router.route("/createNotes/:id").post(createNote);
 router.route("/getAllCategories/:id").get(getAllCategories);
 router.route("/getAllNotes/:id").get(getAllNotes);
-
 module.exports = router;
