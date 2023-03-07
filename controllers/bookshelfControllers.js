@@ -9,7 +9,6 @@ const getAllBooks = async (req, res) => {
   const skip = (page - 1) * limit;
 
   const allBooks = await Book.find({ createdBy: req.user.userID });
-  const allUniqueIDs = [...new Set(allBooks.map((book) => book.id))];
 
   let books;
   let queryObj = {};
@@ -36,7 +35,6 @@ const getAllBooks = async (req, res) => {
       success: true,
       numberOfBooks: books.length,
       numberOfPages,
-      allUniqueIDs,
       books,
     });
   }
@@ -70,8 +68,18 @@ const getAllBooks = async (req, res) => {
     numberOfBooks: books.length,
     numberOfPages,
     books,
-    allUniqueIDs,
   });
+};
+
+const getUniqueIDs = async (req, res) => {
+  const allBooks = await Book.find({ createdBy: req.user.userID });
+  const allUniqueIDs = [...new Set(allBooks.map((book) => book.id))];
+
+  if (!allUniqueIDs) {
+    return res.status(500).json({ msg: "something went wrong!" });
+  }
+
+  res.status(200).json({ success: true, allUniqueIDs });
 };
 
 const getSingleBook = async (req, res) => {
@@ -107,7 +115,7 @@ const updateSingleBook = async (req, res) => {
     return res.status(404).send(`No book with id: ${bookID}`);
   }
 
-  res.status(200).json({ singleBook });
+  res.status(200).json({ success: true, singleBook });
 };
 
 const removeSingleBook = async (req, res) => {
@@ -144,6 +152,7 @@ const rateBook = async (req, res) => {
 
 module.exports = {
   getAllBooks,
+  getUniqueIDs,
   getSingleBook,
   createSingleBook,
   updateSingleBook,
