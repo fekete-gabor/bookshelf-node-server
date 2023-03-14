@@ -50,7 +50,9 @@ const createCategory = async (req, res) => {
   }
 
   if (fieldName.length <= 2) {
-    return res.status(500).send("button name must be at least 3 letters long!");
+    return res
+      .status(500)
+      .send("category name must be at least 3 letters long!");
   }
 
   fieldName = fieldName.toLowerCase().trim();
@@ -112,7 +114,7 @@ const deleteCategory = async (req, res) => {
 
   res
     .status(200)
-    .json({ success: true, msg: "field successfully deleted!", categories });
+    .json({ success: true, msg: "category successfully deleted!", categories });
 };
 
 const createNote = async (req, res) => {
@@ -140,7 +142,7 @@ const createNote = async (req, res) => {
 
   res
     .status(200)
-    .json({ success: true, book, msg: "Notes successfully created!" });
+    .json({ success: true, book, msg: "Note successfully created!" });
 };
 
 const updateNote = async (req, res) => {
@@ -165,7 +167,7 @@ const updateNote = async (req, res) => {
 
   res
     .status(200)
-    .json({ success: true, book, msg: "Field successfully updated!" });
+    .json({ success: true, book, msg: "Note successfully updated!" });
 };
 
 const deleteNote = async (req, res) => {
@@ -204,7 +206,7 @@ const deleteNote = async (req, res) => {
 
   res
     .status(200)
-    .json({ success: true, msg: "notes successfully deleted!", inputs });
+    .json({ success: true, msg: "note successfully deleted!", inputs });
 };
 
 module.exports = {
