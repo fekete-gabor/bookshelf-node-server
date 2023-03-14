@@ -8,20 +8,10 @@ const getAllBooks = async (req, res) => {
   const limit = Number(req.query.maxResults) || 10;
   const skip = (page - 1) * limit;
 
-  const allBooks = await Book.find({ createdBy: req.user.userID });
-
   let books;
   let queryObj = {};
   let numberOfPages;
   let totalBooks;
-
-  if (allBooks.length === 0) {
-    return res.status(200).json({
-      success: true,
-      numberOfBooks: allBooks.length,
-      msg: "Looks like there is nothing here, try to add some books...",
-    });
-  }
 
   if (author.length === 0 && title.length === 0) {
     books = await Book.find({ createdBy: req.user.userID })
@@ -58,7 +48,10 @@ const getAllBooks = async (req, res) => {
     queryObj.title = { $regex: title, $options: "i" };
   }
 
-  books = await Book.find(queryObj).skip(skip).limit(limit);
+  books = await Book.find({ createdBy: req.user.userID })
+    .find(queryObj)
+    .skip(skip)
+    .limit(limit);
 
   totalBooks = await Book.countDocuments(queryObj);
   numberOfPages = Math.ceil(totalBooks / limit);
@@ -104,24 +97,15 @@ const createSingleBook = async (req, res) => {
   res.status(200).json(book);
 };
 
-const updateSingleBook = async (req, res) => {
+const removeSingleBook = async (req, res) => {
+  const { userID } = req.user;
   const { id: bookID } = req.params;
-  const singleBook = await Book.findOneAndUpdate({ id: bookID }, req.body, {
-    new: true,
-    runValidators: true,
+  const singleBook = await Book.findOneAndDelete({
+    createdBy: userID,
+    id: bookID,
   });
 
-  if (!singleBook) {
-    return res.status(404).send(`No book with id: ${bookID}`);
-  }
-
-  res.status(200).json({ success: true, singleBook });
-};
-
-const removeSingleBook = async (req, res) => {
-  const { id: bookID } = req.params;
-  const singleBook = await Book.findOneAndDelete({ id: bookID });
-  await Edit.findOneAndDelete({ id: bookID });
+  await Edit.findOneAndDelete({ createdBy: userID, id: bookID });
 
   if (!singleBook) {
     return res.status(404).send(`No book with id: ${bookID}`);
@@ -155,7 +139,6 @@ module.exports = {
   getUniqueIDs,
   getSingleBook,
   createSingleBook,
-  updateSingleBook,
   removeSingleBook,
   rateBook,
 };
