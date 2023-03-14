@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  backgroundIndex: {
+    type: Number,
+    default: 0,
+  },
   verificationToken: String,
   isVerified: {
     type: Boolean,
