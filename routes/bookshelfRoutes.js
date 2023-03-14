@@ -5,7 +5,6 @@ const {
   getUniqueIDs,
   getSingleBook,
   createSingleBook,
-  updateSingleBook,
   removeSingleBook,
   rateBook,
 } = require("../controllers/bookshelfControllers");
@@ -13,11 +12,7 @@ const {
 router.route("/getUniqueIDs").get(getUniqueIDs);
 
 router.route("/").get(getAllBooks).post(createSingleBook);
-router
-  .route("/:id")
-  .get(getSingleBook)
-  .patch(updateSingleBook)
-  .delete(removeSingleBook);
+router.route("/:id").get(getSingleBook).delete(removeSingleBook);
 
 router.route("/rateBook/:id").post(rateBook);
 
