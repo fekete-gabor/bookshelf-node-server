@@ -10,6 +10,7 @@ const {
   forgotPassword,
   resetPassword,
   changeUserNotifications,
+  changeBackgroundIndex,
 } = require("../controllers/userControllers");
 
 router.get("/showCurrentUser", authenticateUser, showCurrentUser);
@@ -20,5 +21,6 @@ router.delete("/logout", authenticateUser, logout);
 router.post("/forgotPassword", forgotPassword);
 router.post("/resetPassword", resetPassword);
 router.patch("/changeUserNotifications", changeUserNotifications);
+router.patch("/changeBackgroundIndex", changeBackgroundIndex);
 
 module.exports = router;
