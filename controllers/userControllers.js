@@ -68,9 +68,9 @@ const showCurrentUser = async (req, res) => {
   }
 
   const findUser = await User.findOne({ email: user.email });
-  const { notification } = findUser;
+  const { notification, backgroundIndex } = findUser;
 
-  user = { ...user, notification };
+  user = { ...user, notification, backgroundIndex };
 
   res.status(200).json({ user });
 };
@@ -272,6 +272,26 @@ const changeUserNotifications = async (req, res) => {
   res.status(200).json({ message, notificationStatus: update.notification });
 };
 
+const changeBackgroundIndex = async (req, res) => {
+  const { email, index } = req.body;
+
+  const user = await User.findOneAndUpdate(
+    { email },
+    { ...req.body, backgroundIndex: index },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  if (!user) {
+    return res.status(401).send("Please provide valid credentials!");
+  }
+  const { backgroundIndex } = user;
+
+  res.status(200).json({ backgroundIndex });
+};
+
 module.exports = {
   register,
   verifyEmail,
@@ -281,4 +301,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   changeUserNotifications,
+  changeBackgroundIndex,
 };
