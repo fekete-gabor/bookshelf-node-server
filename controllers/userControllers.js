@@ -37,7 +37,7 @@ const register = async (req, res) => {
 
   res
     .status(201)
-    .json({ msg: "Please check your email to verify your account!" });
+    .json({ msg: "Please check your emails to verify your account!" });
 };
 
 const verifyEmail = async (req, res) => {
@@ -130,6 +130,7 @@ const login = async (req, res) => {
         name: user.name,
         email: user.email,
         notification: user.notification,
+        backgroundIndex: user.backgroundIndex,
       },
     });
   }
@@ -167,6 +168,7 @@ const login = async (req, res) => {
       name: user.name,
       email: user.email,
       notification: user.notification,
+      backgroundIndex: user.backgroundIndex,
     },
   });
 };
