@@ -25,7 +25,7 @@ const register = async (req, res) => {
     passwordTokenExpirationDate,
   });
 
-  const origin = "http://localhost:3000";
+  const origin = "the-bookshelf-project.netlify.app";
 
   await sendVerificationEmail({
     name: user.name,
