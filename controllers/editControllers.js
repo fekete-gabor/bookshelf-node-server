@@ -27,12 +27,16 @@ const getAllNotes = async (req, res) => {
 
   let book = await Edit.findOne({ createdBy: userID, id: bookID });
 
+  if (!book) {
+    return res.status(200).send("no categories or notes yet!");
+  }
+
   const findCategory = book.bookEdits.find(
     (book) => book.category === category
   );
 
   if (!findCategory) {
-    return res.status(200);
+    return res.status(200).send("no notes yet!");
   }
 
   const { inputs } = findCategory;
@@ -132,6 +136,10 @@ const createNote = async (req, res) => {
     (book) => book.category === categoryName
   );
 
+  if (!findCategory) {
+    return res.status(200).send("category not found!");
+  }
+
   findCategory.inputs.push({
     id: crypto.randomUUID(),
     name: inputName.name,
@@ -180,6 +188,10 @@ const deleteNote = async (req, res) => {
   }
 
   let book = await Edit.findOne({ createdBy: userID, id: bookID });
+
+  if (!book) {
+    return res.status(200).send("no notes found!");
+  }
 
   const newList = book.bookEdits.map((book) => {
     if (book.category === category) {
