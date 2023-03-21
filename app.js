@@ -38,9 +38,6 @@ app.use(cors());
 app.use(xss());
 
 // routes
-app.get("/api/v1/test", (req, res) => {
-  res.status(200).send("you are here!");
-});
 app.use("/api/v1/auth", user);
 app.use("/api/v1/bookshelf", authenticateUser, bookshelf);
 app.use("/api/v1/edit", authenticateUser, edits);
