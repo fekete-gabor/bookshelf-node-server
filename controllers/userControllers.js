@@ -1,7 +1,6 @@
 const User = require("../models/UserModel");
 const Token = require("../models/TokenModel");
 const { sendVerificationEmail, sendResetPasswordEmail } = require("../utils");
-const sgMail = require("@sendgrid/mail");
 const crypto = require("crypto");
 
 const register = async (req, res) => {
