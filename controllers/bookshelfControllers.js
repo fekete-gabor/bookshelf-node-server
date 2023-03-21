@@ -117,7 +117,7 @@ const removeSingleBook = async (req, res) => {
 const rateBook = async (req, res) => {
   const { userID } = req.user;
   const { id: bookID } = req.params;
-  const { index } = req.query;
+  const { rating } = req.query;
 
   const book = await Book.findOne({ createdBy: userID, id: bookID });
 
@@ -125,7 +125,7 @@ const rateBook = async (req, res) => {
     return res.status(404).send(`No book with id of ${bookID}`);
   }
 
-  book.userRating = parseInt(index);
+  book.userRating = parseInt(rating);
 
   await book.save();
 
