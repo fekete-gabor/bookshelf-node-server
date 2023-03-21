@@ -11,26 +11,28 @@ const sendVerificationEmail = async ({
   const message = `<p>please confirm your email by clicking on the following link :
   <a href="${url}">Link</a></p>`;
 
-  return sendEmail({
-    to: email,
-    subject: "Email Confirmation",
-    html: `<h4>Hello ${name}</h4>
-    ${message}
-    `,
-  });
+  // for testing only
 
-  // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-  // const msg = {
+  // return sendEmail({
   //   to: email,
-  //   from: "fekete_gabor@outlook.hu",
-  //   subject: "Account Confirmation",
+  //   subject: "Email Confirmation",
   //   html: `<h4>Hello ${name}</h4>
   //   ${message}
   //   `,
-  // };
+  // });
 
-  // await sgMail.send(msg);
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+  const msg = {
+    to: email,
+    from: "fekete_gabor@outlook.hu",
+    subject: "Account Confirmation",
+    html: `<h4>Hello ${name}</h4>
+    ${message}
+    `,
+  };
+
+  await sgMail.send(msg);
 };
 
 module.exports = sendVerificationEmail;
