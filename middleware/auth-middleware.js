@@ -39,7 +39,7 @@ const auth = async (req, res, next) => {
     res.cookie("accessToken", accessTokenJWT, {
       httpOnly: true,
       expires: new Date(Date.now() + oneHour),
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
     });

@@ -23,19 +23,6 @@ const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
 // middleware
-app.set(
-  "Access-Control-Allow-Origin",
-  "https://the-bookshelf-project.netlify.app"
-);
-app.set("Access-Control-Allow-Credentials", true);
-app.set("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
-app.set("Access-Control-Allow-Headers", "Content-Type, *");
-
-app.set("trust proxy", 1);
-
-app.enable("trust proxy");
-
-app.disable("x-powered-by");
 app.set("trust proxy", 1);
 app.use(cookieParser(process.env.JWT_SECRET));
 // app.use(
@@ -47,12 +34,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
-app.use(
-  cors({
-    credentials: true,
-    origin: "https://the-bookshelf-project.netlify.app",
-  })
-);
+app.use(cors());
 app.use(xss());
 
 // routes
