@@ -17,7 +17,7 @@ const connectDB = require("./db/connect");
 require("dotenv").config();
 
 app.set("Access-Control-Allow-Origin", "*");
-app.set("Acces-Control-Allow-Credentials", "true");
+
 // security
 const helmet = require("helmet");
 const cors = require("cors");
