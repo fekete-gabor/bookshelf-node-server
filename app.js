@@ -34,7 +34,12 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://the-bookshelf-project.netlify.app",
+  })
+);
 app.use(xss());
 
 // routes
