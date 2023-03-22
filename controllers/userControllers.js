@@ -121,7 +121,6 @@ const login = async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + oneMonth),
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
     });
 
@@ -150,7 +149,6 @@ const login = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + oneHour),
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
   });
 
@@ -161,7 +159,6 @@ const login = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + oneMonth),
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
   });
 

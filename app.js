@@ -28,7 +28,7 @@ app.set(
   "https://the-bookshelf-project.netlify.app"
 );
 app.set("Access-Control-Allow-Credentials", true);
-app.set("Access-Control-Allow-Methods", "GET, POST");
+app.set("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH ");
 app.set("Access-Control-Allow-Headers", "Content-Type, *");
 
 app.set("trust proxy", 1);
@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(
   cors({
-    credentials: true,
+    credentials: "include",
     origin: "https://the-bookshelf-project.netlify.app",
   })
 );
