@@ -92,9 +92,6 @@ const getSingleBook = async (req, res) => {
 const createSingleBook = async (req, res) => {
   const { userID } = req.user;
   const { singleBook } = req.body;
-  singleBook.image = singleBook.image
-    .startsWith("http")
-    .replace("http", "https");
   const payload = { ...singleBook, createdBy: userID };
   const book = await Book.create(payload);
   res.status(200).json(book);
