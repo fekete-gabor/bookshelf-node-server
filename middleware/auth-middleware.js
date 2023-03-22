@@ -42,7 +42,7 @@ const auth = async (req, res, next) => {
       secure: true,
       signed: true,
       SameSite: "none",
-      Domain: ".the-bookshelf-project.netlify.app",
+      Domain: ".https://the-bookshelf-project.netlify.app",
     });
 
     req.user = payload;

@@ -123,7 +123,7 @@ const login = async (req, res) => {
       secure: true,
       signed: true,
       SameSite: "none",
-      Domain: ".the-bookshelf-project.netlify.app",
+      Domain: ".https://the-bookshelf-project.netlify.app",
     });
 
     return res.status(200).json({
@@ -153,7 +153,7 @@ const login = async (req, res) => {
     secure: true,
     signed: true,
     SameSite: "none",
-    Domain: ".the-bookshelf-project.netlify.app",
+    Domain: ".https://the-bookshelf-project.netlify.app",
   });
 
   // create refreshToken cookie
@@ -165,7 +165,7 @@ const login = async (req, res) => {
     secure: true,
     signed: true,
     SameSite: "none",
-    Domain: ".the-bookshelf-project.netlify.app",
+    Domain: ".https://the-bookshelf-project.netlify.app",
   });
 
   res.status(200).json({
