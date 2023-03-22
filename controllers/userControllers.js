@@ -120,10 +120,10 @@ const login = async (req, res) => {
     res.cookie("refreshToken", refreshTokenJWT, {
       httpOnly: true,
       expires: new Date(Date.now() + oneMonth),
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       signed: true,
-      sameSite: "none",
-      domain: ".https://the-bookshelf-project.netlify.app",
+      SameSite: "none",
+      Domain: ".https://the-bookshelf-project.netlify.app",
     });
 
     return res.status(200).json({
@@ -150,10 +150,10 @@ const login = async (req, res) => {
   res.cookie("accessToken", accessTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + oneHour),
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" ? true : false,
     signed: true,
-    sameSite: "none",
-    domain: ".https://the-bookshelf-project.netlify.app",
+    SameSite: "none",
+    Domain: ".https://the-bookshelf-project.netlify.app",
   });
 
   // create refreshToken cookie
@@ -162,10 +162,10 @@ const login = async (req, res) => {
   res.cookie("refreshToken", refreshTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + oneMonth),
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" ? true : false,
     signed: true,
-    sameSite: "none",
-    domain: ".https://the-bookshelf-project.netlify.app",
+    SameSite: "none",
+    Domain: ".https://the-bookshelf-project.netlify.app",
   });
 
   res.status(200).json({
