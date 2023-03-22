@@ -122,6 +122,7 @@ const login = async (req, res) => {
       expires: new Date(Date.now() + oneMonth),
       secure: process.env.NODE_ENV === "production",
       signed: true,
+      sameSite: "none",
     });
 
     return res.status(200).json({
@@ -150,6 +151,7 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + oneHour),
     secure: process.env.NODE_ENV === "production",
     signed: true,
+    sameSite: "none",
   });
 
   // create refreshToken cookie
@@ -160,6 +162,7 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + oneMonth),
     secure: process.env.NODE_ENV === "production",
     signed: true,
+    sameSite: "none",
   });
 
   res.status(200).json({

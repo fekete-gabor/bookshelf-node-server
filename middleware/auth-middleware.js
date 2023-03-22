@@ -41,6 +41,7 @@ const auth = async (req, res, next) => {
       expires: new Date(Date.now() + oneHour),
       secure: process.env.NODE_ENV === "production",
       signed: true,
+      sameSite: "none",
     });
 
     req.user = payload;
