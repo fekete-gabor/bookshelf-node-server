@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(
   cors({
-    credentials: "include",
+    credentials: true,
     origin: "https://the-bookshelf-project.netlify.app",
   })
 );
