@@ -28,7 +28,7 @@ app.set(
   "https://the-bookshelf-project.netlify.app"
 );
 app.set("Access-Control-Allow-Credentials", true);
-app.set("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH ");
+app.set("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
 app.set("Access-Control-Allow-Headers", "Content-Type, *");
 
 app.set("trust proxy", 1);

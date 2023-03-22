@@ -40,6 +40,7 @@ const auth = async (req, res, next) => {
       httpOnly: true,
       expires: new Date(Date.now() + oneHour),
       secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
     });
 
