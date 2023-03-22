@@ -123,6 +123,7 @@ const login = async (req, res) => {
       path: "/",
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      domain: ".netlify.app",
       signed: true,
     });
 
@@ -153,6 +154,7 @@ const login = async (req, res) => {
     path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    domain: ".netlify.app",
     signed: true,
   });
 
@@ -165,6 +167,7 @@ const login = async (req, res) => {
     path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    domain: ".netlify.app",
     signed: true,
   });
 
