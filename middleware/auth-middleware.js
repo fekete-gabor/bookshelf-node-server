@@ -39,10 +39,9 @@ const auth = async (req, res, next) => {
     res.cookie("accessToken", accessTokenJWT, {
       httpOnly: true,
       expires: new Date(Date.now() + oneHour),
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
-      SameSite: "none",
-      Domain: ".https://the-bookshelf-project.netlify.app",
     });
 
     req.user = payload;

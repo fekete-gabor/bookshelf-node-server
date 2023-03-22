@@ -23,6 +23,19 @@ const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
 // middleware
+app.set(
+  "Access-Control-Allow-Origin",
+  "https://the-bookshelf-project.netlify.app"
+);
+app.set("Access-Control-Allow-Credentials", true);
+app.set("Access-Control-Allow-Methods", "GET, POST");
+app.set("Access-Control-Allow-Headers", "Content-Type, *");
+
+app.set("trust proxy", 1);
+
+app.enable("trust proxy");
+
+app.disable("x-powered-by");
 app.set("trust proxy", 1);
 app.use(cookieParser(process.env.JWT_SECRET));
 // app.use(
