@@ -121,6 +121,9 @@ const login = async (req, res) => {
       httpOnly: false,
       expires: new Date(Date.now() + oneMonth),
       secure: true,
+      sameSite: "none",
+      singed: true,
+      domain: ".netlify.app",
     });
 
     return res.status(200).json({
@@ -150,7 +153,7 @@ const login = async (req, res) => {
     secure: true,
     sameSite: "none",
     singed: true,
-    domain: "https://the-bookshelf-project.netlify.app",
+    domain: ".netlify.app",
   });
 
   // create refreshToken cookie
@@ -162,7 +165,7 @@ const login = async (req, res) => {
     secure: true,
     sameSite: "none",
     singed: true,
-    domain: "https://the-bookshelf-project.netlify.app",
+    domain: ".netlify.app",
   });
 
   res.status(200).json({

@@ -40,6 +40,9 @@ const auth = async (req, res, next) => {
       httpOnly: false,
       expires: new Date(Date.now() + oneHour),
       secure: true,
+      sameSite: "none",
+      singed: true,
+      domain: ".netlify.app",
     });
 
     req.user = payload;
