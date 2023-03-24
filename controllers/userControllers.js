@@ -123,6 +123,7 @@ const login = async (req, res) => {
       secure: true,
       sameSite: "none",
       singed: true,
+      domain: "https://bookshelf-node-server-production.up.railway.app",
     });
 
     return res.status(200).json({
@@ -152,6 +153,7 @@ const login = async (req, res) => {
     secure: true,
     sameSite: "none",
     singed: true,
+    domain: "https://bookshelf-node-server-production.up.railway.app",
   });
 
   // create refreshToken cookie
@@ -163,6 +165,7 @@ const login = async (req, res) => {
     secure: true,
     sameSite: "none",
     singed: true,
+    domain: "https://bookshelf-node-server-production.up.railway.app",
   });
 
   res.status(200).json({
