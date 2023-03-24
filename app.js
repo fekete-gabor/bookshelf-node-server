@@ -38,6 +38,14 @@ app.use(express.json());
 app.use(helmet());
 app.use(
   cors({
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "X-Access-Token",
+      "Authorization",
+    ],
     credentials: true,
     origin: "https://the-bookshelf-project.netlify.app",
     path: "/",
