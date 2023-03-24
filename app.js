@@ -57,7 +57,7 @@ app.use(
     ],
     credentials: true,
     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: "https://the-bookshelf-project.netlify.app",
+    origin: true,
     preflightContinue: false,
   })
 );
