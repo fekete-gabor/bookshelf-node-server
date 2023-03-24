@@ -34,32 +34,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://the-bookshelf-project.netlify.app"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-app.use(
-  cors({
-    allowedHeaders: [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "X-Access-Token",
-      "Authorization",
-    ],
-    credentials: true,
-    origin: "https://the-bookshelf-project.netlify.app",
-    methods: "GET,POST,PATCH,DELETE",
-  })
-);
+app.use(cors());
 app.use(xss());
 
 // routes
