@@ -13,11 +13,15 @@ const getAllBooks = async (req, res) => {
   let numberOfPages;
   let totalBooks;
 
-  if (author.length === 0 && title.length === 0) {
-    books = await Book.find({ createdBy: req.user.userID })
-      .skip(skip)
-      .limit(limit);
+  books = await Book.find({ createdBy: req.user.userID })
+    .skip(skip)
+    .limit(limit);
 
+  if (!books) {
+    return res.status(200).send("no books found!");
+  }
+
+  if (author.length === 0 && title.length === 0) {
     totalBooks = await Book.countDocuments();
     numberOfPages = Math.ceil(totalBooks / limit);
 
