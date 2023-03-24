@@ -122,7 +122,7 @@ const login = async (req, res) => {
       expires: new Date(Date.now() + oneMonth),
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      domain: "https://bookshelf-node-server-production.up.railway.app",
+      domain: "https://the-bookshelf-project.netlify.app",
       signed: true,
     });
 
@@ -152,7 +152,7 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + oneHour),
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    domain: "https://bookshelf-node-server-production.up.railway.app",
+    domain: "https://the-bookshelf-project.netlify.app",
     signed: true,
   });
 
@@ -164,7 +164,7 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + oneMonth),
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    domain: "https://bookshelf-node-server-production.up.railway.app",
+    domain: "https://the-bookshelf-project.netlify.app",
     signed: true,
   });
 
