@@ -16,8 +16,6 @@ const morgan = require("morgan");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 
-app.set("Access-Control-Allow-Origin", "*");
-
 // security
 const helmet = require("helmet");
 const cors = require("cors");
@@ -25,7 +23,6 @@ const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
 // middleware
-app.set("trust proxy", 1);
 app.use(cookieParser(process.env.JWT_SECRET));
 // app.use(
 //   rateLimiter({
@@ -36,7 +33,10 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(
   cors({
     credentials: true,
