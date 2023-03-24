@@ -121,6 +121,8 @@ const login = async (req, res) => {
       httpOnly: true,
       expires: new Date(Date.now() + oneMonth),
       secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: "none",
+      singed: true,
     });
 
     return res.status(200).json({
@@ -148,6 +150,8 @@ const login = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + oneHour),
     secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: "none",
+    singed: true,
   });
 
   // create refreshToken cookie
@@ -157,6 +161,8 @@ const login = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + oneMonth),
     secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: "none",
+    singed: true,
   });
 
   res.status(200).json({
