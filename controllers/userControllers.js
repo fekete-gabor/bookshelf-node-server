@@ -121,9 +121,6 @@ const login = async (req, res) => {
       httpOnly: false,
       expires: new Date(Date.now() + oneMonth),
       secure: true,
-      sameSite: "none",
-      singed: true,
-      domain: "https://the-bookshelf-project.netlify.app",
     });
 
     return res.status(200).json({
