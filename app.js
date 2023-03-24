@@ -16,7 +16,10 @@ const morgan = require("morgan");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 
-app.set("Access-Control-Allow-Origin", "*");
+app.set(
+  "Access-Control-Allow-Origin",
+  "https://the-bookshelf-project.netlify.app"
+);
 
 // security
 const helmet = require("helmet");
