@@ -24,12 +24,12 @@ const rateLimiter = require("express-rate-limit");
 
 // middleware
 app.use(cookieParser(process.env.JWT_SECRET));
-// app.use(
-//   rateLimiter({
-//     windowMs: 15 * 60 * 1000,
-//     max: 100,
-//   })
-// );
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+  })
+);
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
