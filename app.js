@@ -51,7 +51,6 @@ app.use(
     ],
     credentials: true,
     origin: "https://the-bookshelf-project.netlify.app",
-    path: "/",
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );

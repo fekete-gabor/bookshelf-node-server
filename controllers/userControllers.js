@@ -120,7 +120,6 @@ const login = async (req, res) => {
     res.cookie("refreshToken", refreshTokenJWT, {
       httpOnly: true,
       expires: new Date(Date.now() + oneMonth),
-      path: "/",
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       domain: "https://bookshelf-node-server-production.up.railway.app",
@@ -151,7 +150,6 @@ const login = async (req, res) => {
   res.cookie("accessToken", accessTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + oneHour),
-    path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     domain: "https://bookshelf-node-server-production.up.railway.app",
@@ -164,7 +162,6 @@ const login = async (req, res) => {
   res.cookie("refreshToken", refreshTokenJWT, {
     httpOnly: true,
     expires: new Date(Date.now() + oneMonth),
-    path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     domain: "https://bookshelf-node-server-production.up.railway.app",
