@@ -51,7 +51,7 @@ app.use(
     ],
     credentials: true,
     origin: "https://the-bookshelf-project.netlify.app",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
+    methods: "GET,POST,PATCH,DELETE",
   })
 );
 app.use(xss());
