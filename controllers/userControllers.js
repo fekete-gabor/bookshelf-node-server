@@ -118,7 +118,7 @@ const login = async (req, res) => {
     const oneMonth = 1000 * 60 * 60 * 24 * 30;
     const refreshTokenJWT = user.createJWT(refreshToken);
     res.cookie("refreshToken", refreshTokenJWT, {
-      httpOnly: true,
+      httpOnly: false,
       expires: new Date(Date.now() + oneMonth),
       path: "/",
       secure: process.env.NODE_ENV === "production" ? true : false,
@@ -149,7 +149,7 @@ const login = async (req, res) => {
   const oneHour = 1000 * 60 * 60;
   const accessTokenJWT = user.createJWT();
   res.cookie("accessToken", accessTokenJWT, {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now() + oneHour),
     path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
@@ -162,7 +162,7 @@ const login = async (req, res) => {
   const oneMonth = 1000 * 60 * 60 * 24 * 30;
   const refreshTokenJWT = user.createJWT(refreshToken);
   res.cookie("refreshToken", refreshTokenJWT, {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now() + oneMonth),
     path: "/",
     secure: process.env.NODE_ENV === "production" ? true : false,
@@ -187,11 +187,11 @@ const logout = async (req, res) => {
   await Token.findOneAndDelete({ user: userID });
 
   res.cookie("accessToken", "logout", {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now()),
   });
   res.cookie("refreshToken", "logout", {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now()),
   });
   res.status(200).json("see you next time!");
