@@ -16,10 +16,6 @@ const morgan = require("morgan");
 const connectDB = require("./db/connect");
 require("dotenv").config();
 
-app.set({
-  "Access-Control-Allow-Origin": "https://the-bookshelf-project.netlify.app",
-});
-
 // security
 const helmet = require("helmet");
 const cors = require("cors");
@@ -38,6 +34,17 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://the-bookshelf-project.netlify.app"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.use(
   cors({
     allowedHeaders: [
