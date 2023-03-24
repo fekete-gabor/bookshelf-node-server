@@ -25,7 +25,7 @@ const register = async (req, res) => {
     passwordTokenExpirationDate,
   });
 
-  const origin = "the-bookshelf-project.railway.app";
+  const origin = "the-bookshelf-project.netlify.app";
 
   await sendVerificationEmail({
     name: user.name,
@@ -118,12 +118,13 @@ const login = async (req, res) => {
     const oneMonth = 1000 * 60 * 60 * 24 * 30;
     const refreshTokenJWT = user.createJWT(refreshToken);
     res.cookie("refreshToken", refreshTokenJWT, {
-      httpOnly: false,
+      httpOnly: true,
       expires: new Date(Date.now() + oneMonth),
-      secure: true,
-      sameSite: "none",
-      singed: true,
+      path: "/",
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       domain: ".netlify.app",
+      signed: true,
     });
 
     return res.status(200).json({
@@ -148,24 +149,26 @@ const login = async (req, res) => {
   const oneHour = 1000 * 60 * 60;
   const accessTokenJWT = user.createJWT();
   res.cookie("accessToken", accessTokenJWT, {
-    httpOnly: false,
+    httpOnly: true,
     expires: new Date(Date.now() + oneHour),
-    secure: true,
-    sameSite: "none",
-    singed: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     domain: ".netlify.app",
+    signed: true,
   });
 
   // create refreshToken cookie
   const oneMonth = 1000 * 60 * 60 * 24 * 30;
   const refreshTokenJWT = user.createJWT(refreshToken);
   res.cookie("refreshToken", refreshTokenJWT, {
-    httpOnly: false,
+    httpOnly: true,
     expires: new Date(Date.now() + oneMonth),
-    secure: true,
-    sameSite: "none",
-    singed: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     domain: ".netlify.app",
+    signed: true,
   });
 
   res.status(200).json({

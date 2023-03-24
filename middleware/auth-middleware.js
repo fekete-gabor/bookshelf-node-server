@@ -37,12 +37,12 @@ const auth = async (req, res, next) => {
 
     // create accessToken cookie
     res.cookie("accessToken", accessTokenJWT, {
-      httpOnly: false,
+      httpOnly: true,
       expires: new Date(Date.now() + oneHour),
-      secure: true,
-      sameSite: "none",
-      singed: true,
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       domain: ".netlify.app",
+      signed: true,
     });
 
     req.user = payload;
