@@ -118,7 +118,7 @@ const login = async (req, res) => {
     const oneMonth = 1000 * 60 * 60 * 24 * 30;
     const refreshTokenJWT = user.createJWT(refreshToken);
     res.cookie("refreshToken", refreshTokenJWT, {
-      httpOnly: true,
+      httpOnly: false,
       expires: new Date(Date.now() + oneMonth),
       secure: true,
       sameSite: "none",
@@ -148,7 +148,7 @@ const login = async (req, res) => {
   const oneHour = 1000 * 60 * 60;
   const accessTokenJWT = user.createJWT();
   res.cookie("accessToken", accessTokenJWT, {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now() + oneHour),
     secure: true,
     sameSite: "none",
@@ -160,7 +160,7 @@ const login = async (req, res) => {
   const oneMonth = 1000 * 60 * 60 * 24 * 30;
   const refreshTokenJWT = user.createJWT(refreshToken);
   res.cookie("refreshToken", refreshTokenJWT, {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(Date.now() + oneMonth),
     secure: true,
     sameSite: "none",

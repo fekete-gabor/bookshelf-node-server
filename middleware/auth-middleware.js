@@ -37,7 +37,7 @@ const auth = async (req, res, next) => {
 
     // create accessToken cookie
     res.cookie("accessToken", accessTokenJWT, {
-      httpOnly: true,
+      httpOnly: false,
       expires: new Date(Date.now() + oneHour),
       secure: true,
       sameSite: "none",
