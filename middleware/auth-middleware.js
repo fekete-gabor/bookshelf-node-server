@@ -3,7 +3,6 @@ const Token = require("../models/TokenModel");
 
 const auth = async (req, res, next) => {
   const { accessToken, refreshToken } = req.signedCookies;
-
   try {
     if (accessToken) {
       const payload = jwt.verify(accessToken, process.env.JWT_SECRET);
@@ -37,7 +36,7 @@ const auth = async (req, res, next) => {
 
     // create accessToken cookie
     res.cookie("accessToken", accessTokenJWT, {
-      httpOnly: false,
+      httpOnly: true,
       expires: new Date(Date.now() + oneHour),
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
