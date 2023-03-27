@@ -123,7 +123,7 @@ const login = async (req, res) => {
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
-      domain: "https://bookshelf-node-server-production.up.railway.app",
+      domain: ".railway.app",
     });
 
     return res.status(200).json({
@@ -153,7 +153,7 @@ const login = async (req, res) => {
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
-    domain: "https://bookshelf-node-server-production.up.railway.app",
+    domain: ".railway.app",
   });
 
   // create refreshToken cookie
@@ -165,7 +165,7 @@ const login = async (req, res) => {
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
-    domain: "https://bookshelf-node-server-production.up.railway.app",
+    domain: ".railway.app",
   });
 
   res.status(200).json({

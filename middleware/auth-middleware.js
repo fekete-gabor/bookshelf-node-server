@@ -41,7 +41,7 @@ const auth = async (req, res, next) => {
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
-      domain: "https://bookshelf-node-server-production.up.railway.app",
+      domain: ".railway.app",
     });
 
     req.user = payload;
