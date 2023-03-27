@@ -180,8 +180,18 @@ const logout = async (req, res) => {
 
   await Token.findOneAndDelete({ user: userID });
 
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    signed: true,
+  });
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    signed: true,
+  });
   res.status(200).json("see you next time!");
 };
 
