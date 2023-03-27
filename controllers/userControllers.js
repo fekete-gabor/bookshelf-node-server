@@ -183,12 +183,8 @@ const logout = async (req, res) => {
 
   await Token.findOneAndDelete({ user: userID });
 
-  res.cookie("accessToken", "logout", {
-    expires: new Date(Date.now()),
-  });
-  res.cookie("refreshToken", "logout", {
-    expires: new Date(Date.now()),
-  });
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
   res.status(200).json("see you next time!");
 };
 
