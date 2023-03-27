@@ -41,6 +41,7 @@ const auth = async (req, res, next) => {
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
+      domain: ".netlify.app",
     });
 
     req.user = payload;
