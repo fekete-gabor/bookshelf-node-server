@@ -17,7 +17,7 @@ router.get("/showCurrentUser", authenticateUser, showCurrentUser);
 router.post("/register", register);
 router.post("/verifyEmail", verifyEmail);
 router.post("/login", login);
-router.delete("/logout", authenticateUser, logout);
+router.post("/logout", authenticateUser, logout);
 router.post("/forgotPassword", forgotPassword);
 router.post("/resetPassword", resetPassword);
 router.patch("/changeUserNotifications", changeUserNotifications);
