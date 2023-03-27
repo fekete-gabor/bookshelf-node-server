@@ -184,12 +184,20 @@ const logout = async (req, res) => {
   await Token.findOneAndDelete({ user: userID });
 
   res.cookie("accessToken", "logout", {
-    httpOnly: true,
     expires: new Date(Date.now()),
+    httpOnly: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    signed: true,
   });
   res.cookie("refreshToken", "logout", {
-    httpOnly: true,
     expires: new Date(Date.now()),
+    httpOnly: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    signed: true,
   });
   res.status(200).json("see you next time!");
 };
