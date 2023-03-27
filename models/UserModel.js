@@ -57,8 +57,7 @@ UserSchema.pre("save", async function () {
 UserSchema.methods.createJWT = function (refreshToken) {
   const token = jwt.sign(
     { userID: this._id, name: this.name, email: this.email, refreshToken },
-    process.env.JWT_SECRET,
-    { algorithm: "HS256" }
+    process.env.JWT_SECRET
   );
   return token;
 };
