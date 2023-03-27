@@ -120,7 +120,7 @@ const login = async (req, res) => {
     res.cookie("refreshToken", refreshTokenJWT, {
       httpOnly: false,
       expires: new Date(Date.now() + oneMonth),
-      path: "/",
+
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
@@ -151,7 +151,7 @@ const login = async (req, res) => {
   res.cookie("accessToken", accessTokenJWT, {
     httpOnly: false,
     expires: new Date(Date.now() + oneHour),
-    path: "/",
+
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
@@ -164,7 +164,7 @@ const login = async (req, res) => {
   res.cookie("refreshToken", refreshTokenJWT, {
     httpOnly: false,
     expires: new Date(Date.now() + oneMonth),
-    path: "/",
+
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
