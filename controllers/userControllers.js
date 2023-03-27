@@ -119,7 +119,7 @@ const login = async (req, res) => {
     const refreshTokenJWT = user.createJWT(refreshToken);
     res.cookie("refreshToken", refreshTokenJWT, {
       expires: new Date(Date.now() + oneMonth),
-
+      httpOnly: true,
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
@@ -149,7 +149,7 @@ const login = async (req, res) => {
   const accessTokenJWT = user.createJWT();
   res.cookie("accessToken", accessTokenJWT, {
     expires: new Date(Date.now() + oneHour),
-
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
@@ -161,7 +161,7 @@ const login = async (req, res) => {
   const refreshTokenJWT = user.createJWT(refreshToken);
   res.cookie("refreshToken", refreshTokenJWT, {
     expires: new Date(Date.now() + oneMonth),
-
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
