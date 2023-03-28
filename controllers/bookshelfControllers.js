@@ -22,16 +22,13 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length === 0 && title.length === 0) {
-    totalBooks = await Book.countDocuments();
+    totalBooks = await Book.countDocuments({ createdBy: req.user.userID });
     numberOfPages = Math.ceil(totalBooks / limit);
 
     return res.status(200).json({
       success: true,
       numberOfBooks: books.length,
       numberOfPages,
-      totalBooks,
-      limit,
-      maxResults: req.query.maxResults,
       books,
     });
   }
