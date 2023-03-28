@@ -29,6 +29,9 @@ const getAllBooks = async (req, res) => {
       success: true,
       numberOfBooks: books.length,
       numberOfPages,
+      totalBooks,
+      limit,
+      maxResults,
       books,
     });
   }
