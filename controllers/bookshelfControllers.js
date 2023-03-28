@@ -57,9 +57,9 @@ const getAllBooks = async (req, res) => {
     .skip(skip)
     .limit(limit);
 
-  totalBooks = await Book.countDocuments({
-    createdBy: req.user.userID,
-  }).countDocuments(queryObj);
+  queryObj = { ...queryObj, createdBy: req.user.userID };
+
+  totalBooks = await Book.countDocuments(queryObj);
   numberOfPages = Math.ceil(totalBooks / limit);
 
   return res.status(200).json({
