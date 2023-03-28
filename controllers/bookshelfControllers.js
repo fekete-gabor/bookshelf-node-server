@@ -31,7 +31,7 @@ const getAllBooks = async (req, res) => {
       numberOfPages,
       totalBooks,
       limit,
-      maxResults,
+      maxResults: req.query.maxResults,
       books,
     });
   }
