@@ -43,16 +43,16 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length > 0 && title.length === 0) {
-    queryObj.authors = { $regex: author, $options: "i" };
+    queryObj.authors = { $regex: author, $options: "si" };
   }
 
   if (author.length === 0 && title.length > 0) {
-    queryObj.title = { $regex: title, $options: "i" };
+    queryObj.title = { $regex: title, $options: "si" };
   }
 
   if (author.length > 0 && title.length > 0) {
-    queryObj.authors = { $regex: author, $options: "i" };
-    queryObj.title = { $regex: title, $options: "i" };
+    queryObj.authors = { $regex: author, $options: "si" };
+    queryObj.title = { $regex: title, $options: "si" };
   }
 
   queryObj = { ...queryObj, createdBy: req.user.userID };
