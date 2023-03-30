@@ -119,7 +119,7 @@ const login = async (req, res) => {
     const refreshTokenJWT = user.createJWT(refreshToken);
     res.cookie("refreshToken", refreshTokenJWT, {
       expires: new Date(Date.now() + oneMonth),
-      httpOnly: false,
+      httpOnly: true,
       secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       signed: true,
@@ -148,7 +148,7 @@ const login = async (req, res) => {
   const accessTokenJWT = user.createJWT();
   res.cookie("accessToken", accessTokenJWT, {
     expires: new Date(Date.now() + oneHour),
-    httpOnly: false,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
@@ -159,7 +159,7 @@ const login = async (req, res) => {
   const refreshTokenJWT = user.createJWT(refreshToken);
   res.cookie("refreshToken", refreshTokenJWT, {
     expires: new Date(Date.now() + oneMonth),
-    httpOnly: false,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
@@ -181,13 +181,13 @@ const logout = async (req, res) => {
   await Token.findOneAndDelete({ user: userID });
 
   res.clearCookie("accessToken", {
-    httpOnly: false,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
   });
   res.clearCookie("refreshToken", {
-    httpOnly: false,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     signed: true,
