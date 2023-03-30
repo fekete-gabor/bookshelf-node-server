@@ -39,21 +39,17 @@ const getAllBooks = async (req, res) => {
       .json({ msg: "name must be at least 3 letters long!" });
   }
 
-  Book.createIndexes({ authors: "text" });
-  Book.createIndexes({ title: "text" });
-
   if (author.length > 0 && title.length === 0) {
-    queryObj.authors = { $text: { $search: author, $options: "i" } };
+    queryObj.authors = { $regex: author, $options: "i" };
   }
 
   if (author.length === 0 && title.length > 0) {
-    queryObj.authors = { $text: { $search: author, $options: "i" } };
-    queryObj.title = { $text: { $search: title, $options: "i" } };
+    queryObj.title = { $regex: title, $options: "i" };
   }
 
   if (author.length > 0 && title.length > 0) {
-    queryObj.authors = { $text: { $search: author, $options: "i" } };
-    queryObj.title = { $text: { $search: title, $options: "i" } };
+    queryObj.authors = { $regex: author, $options: "i" };
+    queryObj.title = { $regex: title, $options: "i" };
   }
 
   queryObj = { ...queryObj, createdBy: req.user.userID };
