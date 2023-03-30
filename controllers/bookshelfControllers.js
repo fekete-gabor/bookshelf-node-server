@@ -4,6 +4,9 @@ const Edit = require("../models/EditModel");
 const getAllBooks = async (req, res) => {
   const { author, title } = req.query;
 
+  author = author.trim();
+  title = title.trim();
+
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.maxResults) || 10;
   const skip = (page - 1) * limit;
