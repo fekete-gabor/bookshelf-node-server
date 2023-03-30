@@ -2,7 +2,7 @@ const Book = require("../models/BookModel");
 const Edit = require("../models/EditModel");
 
 const getAllBooks = async (req, res) => {
-  const { author, title } = req.query;
+  let { author, title } = req.query;
 
   author = author.trim();
   title = title.trim();
