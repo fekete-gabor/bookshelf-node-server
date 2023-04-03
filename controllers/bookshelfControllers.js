@@ -1,4 +1,3 @@
-const { db } = require("../models/BookModel");
 const Book = require("../models/BookModel");
 const Edit = require("../models/EditModel");
 
@@ -7,8 +6,6 @@ const getAllBooks = async (req, res) => {
 
   author = author.trim();
   title = title.trim();
-
-  await db.collection.createIndex({ authors: "text" });
 
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.maxResults) || 10;
@@ -46,7 +43,7 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length > 0 && title.length === 0) {
-    queryObj.authors = { $text: { $search: "mark" } };
+    queryObj.authors = { $regex: author, $options: "si" };
   }
 
   if (author.length === 0 && title.length > 0) {
