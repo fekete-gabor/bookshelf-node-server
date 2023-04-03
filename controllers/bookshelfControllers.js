@@ -4,7 +4,7 @@ const Edit = require("../models/EditModel");
 const getAllBooks = async (req, res) => {
   let { author, title } = req.query;
 
-  author = author.trim();
+  author = author.trim().split(" ");
   title = title.trim();
 
   const page = Number(req.query.page) || 1;
@@ -43,7 +43,7 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length > 0 && title.length === 0) {
-    queryObj.authors = { $split: [author, " "] };
+    queryObj.authors = { $regex: author, $options: "si" };
   }
 
   if (author.length === 0 && title.length > 0) {
