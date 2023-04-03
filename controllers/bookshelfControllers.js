@@ -3,7 +3,7 @@ const Edit = require("../models/EditModel");
 
 const getAllBooks = async (req, res) => {
   let { author, title } = req.query;
-  const test = author.split("+");
+  const test = author.split(" ");
   author = author.trim();
   title = title.trim();
 
@@ -68,7 +68,6 @@ const getAllBooks = async (req, res) => {
     numberOfPages,
     books,
     test,
-    author,
   });
 };
 
