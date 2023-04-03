@@ -43,7 +43,7 @@ const getAllBooks = async (req, res) => {
   }
 
   if (author.length > 0 && title.length === 0) {
-    queryObj.authors = { $in: test, $options: "si" };
+    queryObj.authors = { $in: test };
   }
 
   if (author.length === 0 && title.length > 0) {
