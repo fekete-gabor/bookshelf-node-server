@@ -8,7 +8,7 @@ const getAllBooks = async (req, res) => {
   author = author.trim();
   title = title.trim();
 
-  await Book.createIndex({ authors: "text" });
+  await db.collection.createIndex({ authors: "text" });
 
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.maxResults) || 10;
