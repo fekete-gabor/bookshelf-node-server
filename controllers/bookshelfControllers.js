@@ -68,6 +68,7 @@ const getAllBooks = async (req, res) => {
     numberOfPages,
     books,
     test,
+    author,
   });
 };
 
