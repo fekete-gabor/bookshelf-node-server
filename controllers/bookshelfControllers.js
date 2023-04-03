@@ -4,7 +4,7 @@ const Edit = require("../models/EditModel");
 const getAllBooks = async (req, res) => {
   let { author, title } = req.query;
 
-  author = author.trim().split(" ");
+  author = author.trim();
   title = title.trim();
 
   const page = Number(req.query.page) || 1;
