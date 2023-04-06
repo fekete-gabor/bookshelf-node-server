@@ -36,12 +36,6 @@ const getAllBooks = async (req, res) => {
     });
   }
 
-  if (author.length <= 2 && title.length === 0) {
-    return res
-      .status(500)
-      .json({ msg: "name must be at least 3 letters long!" });
-  }
-
   if (author.length > 0 && title.length === 0) {
     queryObj.authors = { $regex: author, $options: "si" };
   }
