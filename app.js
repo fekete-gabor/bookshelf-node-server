@@ -50,6 +50,8 @@ app.use(
 );
 app.use(xss());
 
+app.use(express.static("./public"));
+
 // routes
 app.use("/api/v1/auth", user);
 app.use("/api/v1/bookshelf", authenticateUser, bookshelf);
@@ -59,7 +61,7 @@ app.use("/api/v1/edit", authenticateUser, edits);
 app.use(errorHandlerMiddleware);
 app.use(notFound);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {
