@@ -4,6 +4,7 @@ require("express-async-errors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
+const path = require("path");
 
 const bookshelf = require("./routes/bookshelfRoutes");
 const user = require("./routes/authRoutes");
@@ -50,7 +51,11 @@ app.use(
 );
 app.use(xss());
 
-app.use(express.static("./public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", function (req, res, next) {
+  res.render("index.html");
+});
 
 // routes
 app.use("/api/v1/auth", user);
