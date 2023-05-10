@@ -50,7 +50,7 @@ app.use(
 );
 app.use(xss());
 
-app.use(express.static("./public"));
+app.use("/static", express.static("public"));
 
 // routes
 app.use("/api/v1/auth", user);
